@@ -12,11 +12,34 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+              buildConfigField "String", "CONFIG_URL", "\"https://vcbackend.appspot.com/\""
+              //buildConfigField "String", "CONFIG_URL", "\"http://10.0.3.2:8080/\""
+              buildConfigField "String", "UPDATE_URL", "\"http://newsuperapp.com\""
+
+        }
         release {
+            buildConfigField "String", "UPDATE_URL", "\"http://newsuperapp.com\""
+            buildConfigField "String", "CONFIG_URL", "\"https://vcbackend.appspot.com/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+        flavorDimensions "store"
+
+        productFlavors {
+
+            GooglePlay{
+                flavorDimension "store"
+                buildConfigField "String", "SHARE_URL", "\"http://mybestappforgooglestore.com\""
+            }
+
+            Amazon{
+                flavorDimension "store"
+                buildConfigField "String", "SHARE_URL", "\"http://mybestappforamazon.com\""
+            }
+        }
+
 }
 
 dependencies {
@@ -24,6 +47,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(':lib')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'

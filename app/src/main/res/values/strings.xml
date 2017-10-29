@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HWork05_VersionControl</string>
+    <string name="check_version">Check Version</string>
 </resources>
